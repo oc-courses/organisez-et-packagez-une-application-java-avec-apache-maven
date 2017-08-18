@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =============================================================== -->
+    <!-- Informations du projet -->
+    <!-- =============================================================== -->
+    <!-- ===== Projet Parent Maven ===== -->
+    <parent>
+        <groupId>org.exemple.demo</groupId>
+        <artifactId>ticket</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <!-- ===== Informations Maven ===== -->
+    <artifactId>ticket-batch</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- ===== Informations générales ===== -->
+    <name>Ticket - Jeu de batchs</name>
+    <url>http://maven.apache.org</url>
+
+
+    <!-- =============================================================== -->
+    <!-- Dépendances -->
+    <!-- =============================================================== -->
+    <dependencies>
+        <!-- ===== Modules ===== -->
+        <dependency>
+            <groupId>org.exemple.demo</groupId>
+            <artifactId>ticket-business</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.exemple.demo</groupId>
+            <artifactId>ticket-model</artifactId>
+        </dependency>
+
+        <!-- ===== Bibliothèques tierces ===== -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.bval</groupId>
+            <artifactId>bval-jsr</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
+    <build>
+        <plugins>
+            <!-- Création du JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.exemple.demo.ticket.batch.App</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix></classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Assemblage -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/archive-deploy.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assembly-archive-deploy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

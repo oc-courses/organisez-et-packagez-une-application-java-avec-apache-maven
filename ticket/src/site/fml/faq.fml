@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/FML/1.0.1"
+      xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+
+      title="Foire Aux Questions"
+      toplink="false">
+
+    <part id="general">
+        <title>Général</title>
+        <faq id="why-x">
+            <question>
+                Pourquoi ... ?
+            </question>
+            <answer>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam architecto assumenda
+                    consequuntur delectus deleniti dolores dolorum ex excepturi explicabo ipsa, labore magnam maxime,
+                    modi
+                    nemo sint, sit veniam voluptate.
+                </p>
+                <p>...</p>
+            </answer>
+        </faq>
+
+        <faq id="how-x">
+            <question>
+                Comment ... ?
+            </question>
+            <answer>
+                <p>...</p>
+            </answer>
+        </faq>
+    </part>
+
+    <part id="install">
+        <title>Installation</title>
+        <faq id="how-install">
+            <question>
+                Comment installer ... ?
+            </question>
+            <answer>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam architecto assumenda
+                    consequuntur delectus deleniti dolores dolorum ex excepturi explicabo ipsa, labore magnam maxime,
+                    modi
+                    nemo sint, sit veniam voluptate.
+                </p>
+                <source>apt-get install xxx</source>
+            </answer>
+        </faq>
+    </part>
+</faqs>

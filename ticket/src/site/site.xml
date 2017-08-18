@@ -1,0 +1,37 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/DECORATION/1.7.0"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd">
+
+    <!-- utilisation du template de site fluido -->
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.6</version>
+    </skin>
+
+    <!-- Affichage de la date et de la version à droite dans le bandeau du haut -->
+    <publishDate position="right"/>
+    <version position="right"/>
+
+    <body>
+        <!-- Ajout d'un fil d'ariane -->
+        <breadcrumbs>
+            <item name="Accueil" href="index.html"/>
+        </breadcrumbs>
+
+        <!-- ===== Menus ===== -->
+        <!-- Ajout d'un menu vers le projet parent -->
+        <menu ref="parent" inherit="top"/>
+        <!-- Ajout d'un menu vers les différents rapport -->
+        <menu ref="reports" inherit="top"/>
+        <!-- Ajout d'un menu vers les différents modules du projet -->
+        <menu ref="modules" inherit="top"/>
+
+        <!-- Ajout d'un menu vers la documentation -->
+        <menu name="Documentation">
+            <!-- Entrée de menu vers la page Architecture -->
+            <item name="Architecture" href="architecture.html"/>
+            <!-- Entrée de menu vers la page FAQ -->
+            <item name="FAQ" href="faq.html"/>
+        </menu>
+    </body>
+</project>

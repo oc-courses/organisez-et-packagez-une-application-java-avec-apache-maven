@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =============================================================== -->
+    <!-- Informations du projet -->
+    <!-- =============================================================== -->
+    <!-- ===== Projet Parent Maven ===== -->
+    <parent>
+        <groupId>org.exemple.demo</groupId>
+        <artifactId>ticket</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <!-- ===== Informations Maven ===== -->
+    <artifactId>ticket-webapp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <!-- ===== Informations générales ===== -->
+    <name>Ticket - Application web</name>
+    <url>http://maven.apache.org</url>
+
+
+    <!-- =============================================================== -->
+    <!-- Propriétés -->
+    <!-- =============================================================== -->
+    <properties>
+        <application.name>TicketTac</application.name>
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+    </properties>
+
+
+    <!-- =============================================================== -->
+    <!-- Dépendances -->
+    <!-- =============================================================== -->
+    <dependencies>
+        <!-- ===== Modules ===== -->
+        <dependency>
+            <groupId>org.exemple.demo</groupId>
+            <artifactId>ticket-business</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.exemple.demo</groupId>
+            <artifactId>ticket-model</artifactId>
+        </dependency>
+
+
+        <!-- ===== Bibliothèques tierces ===== -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.bval</groupId>
+            <artifactId>bval-jsr</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <!-- =============================================================== -->
+    <!-- Profils -->
+    <!-- =============================================================== -->
+    <profiles>
+        <profile>
+            <id>target-dev</id>
+            <!-- ... -->
+        </profile>
+        <profile>
+            <id>target-test</id>
+            <!-- ... -->
+        </profile>
+        <profile>
+            <id>target-prod</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>enforce-no-snapshot-prod</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <!-- Le projet et son parent ne doivent pas être en SNAPSHOT -->
+                                        <requireReleaseVersion />
+                                        <!-- Aucune dépendance ne doit être en SNAPSHOT -->
+                                        <requireReleaseDeps />
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
+    <build>
+        <finalName>ticket-webapp</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-profile-target</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireActiveProfile>
+                                    <profiles>target-dev,target-test,target-prod</profiles>
+                                    <all>false</all>
+                                </requireActiveProfile>
+                            </rules>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Packaging WAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>jsp/_include/header.jsp</include>
+                                <include>jsp/_include/footer.jsp</include>
+                                <include>jsp/about.jsp</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
